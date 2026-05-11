@@ -26,12 +26,15 @@ function exitEditor() {
 // ── Ajout d'un contrôle ──
 function addCtrl(type) {
   const d = DEFS[type] || DEFS.text;
+  const sw = el('sheet-wrapper');
+  const ratio = sw.clientHeight > 0 ? sw.clientWidth / sw.clientHeight : 1;
+  const h = isCb({ type }) ? +(d.w * ratio).toFixed(2) : d.h;
   const c = {
     id:       uid(),
     type,
     name:     type + '_' + _uid,
     left:     40,   top:    40,
-    width:    d.w,  height: d.h,
+    width:    d.w,  height: h,
     rotation: 0,
     fontSize: d.fs,
     color:    '#1a0e00',
