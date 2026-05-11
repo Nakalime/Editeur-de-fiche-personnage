@@ -20,7 +20,6 @@ Cliquer sur un champ et taper. Les cases à cocher s'activent au clic. Les valeu
 
 | Bouton | Action |
 | --- | --- |
-| 🗑️ Réinitialiser | Efface toutes les valeurs, la disposition, le fond et les notes (confirmation requise) |
 | 🖨️ Imprimer | Lance l'impression (Ctrl+P fonctionne aussi) |
 | 📤 Export JSON | Sauvegarde layout + valeurs dans un fichier portable |
 | 📥 Import JSON | Restaure un fichier exporté précédemment |
@@ -46,6 +45,7 @@ Cliquer sur **✏️ Éditeur** pour entrer dans le mode éditeur.
 - **Touches flèches** : déplace le champ sélectionné de 0,1 % (+ Shift = 0,5 %)
 - **Suppr / Backspace** : supprime le champ sélectionné
 - **⧉ Dupliquer** : disponible dans la barre et dans le panneau de propriétés
+- **🗑️ Réinitialiser** : efface tout (valeurs, disposition, fond, notes) — modale de confirmation
 - **✅ Terminer** : quitte le mode éditeur
 
 Les losanges (`◇`) ont une rotation de base de 45° ; le champ `rotation` s'ajoute à ce décalage.

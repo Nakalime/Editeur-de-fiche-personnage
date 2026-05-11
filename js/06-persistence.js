@@ -163,19 +163,42 @@ function autoSave() {
 }
 
 function resetValues() {
-  if (!confirm(
+  showConfirm(
     'Réinitialisation complète — ceci va effacer :\n\n' +
-    '  • les valeurs saisies\n' +
-    '  • la disposition des contrôles\n' +
-    '  • l\'image de fond\n' +
-    '  • les notes\n\n' +
-    'Cette action est irréversible. Continuer ?'
-  )) return;
+    '• les valeurs saisies\n' +
+    '• la disposition des contrôles\n' +
+    '• l\'image de fond\n' +
+    '• les notes\n\n' +
+    'Cette action est irréversible.',
+    () => {
+      ['fiche-data', 'fiche-layout', 'fiche-bg', 'fiche-bg-name', 'fiche-notes']
+        .forEach(k => localStorage.removeItem(k));
+      location.reload();
+    }
+  );
+}
 
-  ['fiche-data', 'fiche-layout', 'fiche-bg', 'fiche-bg-name', 'fiche-notes']
-    .forEach(k => localStorage.removeItem(k));
+// ═══════════════════════════════════════════
+//  MODALE DE CONFIRMATION
+// ═══════════════════════════════════════════
 
-  location.reload();
+function showConfirm(msg, onOk) {
+  el('confirm-msg').textContent = msg;
+  el('confirm-overlay').classList.add('visible');
+
+  const ok     = el('confirm-ok');
+  const cancel = el('confirm-cancel');
+
+  function close() {
+    el('confirm-overlay').classList.remove('visible');
+    ok.removeEventListener('click', onConfirm);
+    cancel.removeEventListener('click', onCancel);
+  }
+  function onConfirm() { close(); onOk(); }
+  function onCancel()  { close(); }
+
+  ok.addEventListener('click', onConfirm);
+  cancel.addEventListener('click', onCancel);
 }
 
 // ═══════════════════════════════════════════

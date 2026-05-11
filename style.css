@@ -231,6 +231,39 @@ body.editor #props-panel { display: block; }
 .p-actions                { padding: 8px 10px; display: flex; flex-direction: column; gap: 5px; }
 .p-actions .btn           { font-size: 11px; padding: 4px; }
 
+/* ═══════════════════════ MODALE DE CONFIRMATION ═══════════════════════ */
+#confirm-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+#confirm-overlay.visible { display: flex; }
+#confirm-box {
+  background: #1a1208;
+  border: 2px solid #8a6020;
+  padding: 20px 24px;
+  max-width: 360px;
+  width: 90%;
+  border-radius: 4px;
+}
+#confirm-msg {
+  color: #e8d49a;
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  white-space: pre-line;
+}
+.confirm-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
 /* ═══════════════════════ CARNET DE NOTES ═══════════════════════ */
 #notes-panel {
   width: 280px;
