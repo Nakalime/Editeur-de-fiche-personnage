@@ -163,21 +163,19 @@ function autoSave() {
 }
 
 function resetValues() {
-  if (!confirm('Réinitialiser tous les champs ?')) return;
+  if (!confirm(
+    'Réinitialisation complète — ceci va effacer :\n\n' +
+    '  • les valeurs saisies\n' +
+    '  • la disposition des contrôles\n' +
+    '  • l\'image de fond\n' +
+    '  • les notes\n\n' +
+    'Cette action est irréversible. Continuer ?'
+  )) return;
 
-  controls.forEach(c => {
-    c.value   = '';
-    c.checked = false;
-    const w = ctrlEl(c.id);
-    if (!w) return;
-    const inp = w.querySelector('input[type="text"], input[type="number"]');
-    if (inp) inp.value = '';
-    const cb = w.querySelector('.ctrl-cb');
-    if (cb) cb.classList.remove('checked');
-  });
+  ['fiche-data', 'fiche-layout', 'fiche-bg', 'fiche-bg-name', 'fiche-notes']
+    .forEach(k => localStorage.removeItem(k));
 
-  localStorage.removeItem('fiche-data');
-  showStatus('Réinitialisé ✓');
+  location.reload();
 }
 
 // ═══════════════════════════════════════════
