@@ -24,6 +24,7 @@ Cliquer sur un champ et taper. Les cases à cocher s'activent au clic. Les valeu
 | 🖨️ Imprimer | Lance l'impression (Ctrl+P fonctionne aussi) |
 | 📤 Export JSON | Sauvegarde layout + valeurs dans un fichier portable |
 | 📥 Import JSON | Restaure un fichier exporté précédemment |
+| 🖼 Changer le fond | Charge une image de fond (compressée automatiquement si nécessaire) |
 | ✏️ Éditeur | Passe en mode éditeur pour modifier la disposition |
 
 ### Carnet de notes
@@ -49,14 +50,16 @@ Cliquer sur **✏️ Éditeur** pour entrer dans le mode éditeur.
 
 Les losanges (`◇`) ont une rotation de base de 45° ; le champ `rotation` s'ajoute à ce décalage.
 
-L'image de fond peut être remplacée via **🖼 Changer le fond** (stockée dans le navigateur si < ~5 Mo).
+L'image de fond peut aussi être remplacée depuis le mode éditeur via **🖼 Changer le fond**.
 
 ## Persistance
 
 | Mécanisme | Ce qui est stocké | Portabilité |
 | --- | --- | --- |
-| Navigateur (automatique) | Layout + valeurs + fond | Local uniquement |
+| Navigateur (automatique) | Layout + valeurs + fond* | Local uniquement |
 | Export / Import JSON | Layout + valeurs | Fichier transférable entre appareils |
+
+*L'image de fond est compressée automatiquement (JPEG progressif) pour tenir dans le stockage navigateur. Si elle est trop grande même après compression, une notice invite à la recharger à chaque session.
 
 Pour partager ou archiver une fiche complète, utiliser **📤 Export JSON** — le fichier contient à la fois la disposition des champs et toutes les valeurs saisies.
 
