@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Éditeur de Fiche Personnage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════ TOOLBAR ═══════════════════════ -->
+  <div id="toolbar">
+
+    <!-- Mode normal -->
+    <div id="tb-normal" style="display:flex; gap:5px; align-items:center; flex-wrap:wrap;">
+      <button class="btn"       onclick="saveSheet()">💾 Sauvegarder</button>
+      <button class="btn"       onclick="loadSheet()">📂 Charger</button>
+      <button class="btn"       onclick="resetValues()">🗑️ Réinitialiser</button>
+      <button class="btn"       onclick="window.print()">🖨️ Imprimer</button>
+      <div class="tb-sep"></div>
+      <button class="btn blue"  onclick="enterEditor()">✏️ Éditeur</button>
+    </div>
+
+    <!-- Mode éditeur -->
+    <div id="tb-editor">
+      <span id="editor-label">✏ ÉDITEUR</span>
+      <div class="tb-sep"></div>
+      <button class="btn" onclick="addCtrl('text')">＋ Texte</button>
+      <button class="btn" onclick="addCtrl('number')">＋ Nombre</button>
+      <button class="btn" onclick="addCtrl('cb-sq')">＋ Case □</button>
+      <button class="btn" onclick="addCtrl('cb-di')">＋ Losange ◇</button>
+      <div class="tb-sep"></div>
+      <button class="btn gold"  onclick="duplicateSel()">⧉ Dupliquer</button>
+      <button class="btn red"   onclick="deleteSel()">🗑 Supprimer</button>
+      <div class="tb-sep"></div>
+      <button class="btn"       onclick="exportSheet()">📤 Export JSON</button>
+      <button class="btn"       onclick="document.getElementById('f-import').click()">📥 Import JSON</button>
+      <input  type="file" id="f-import" accept=".json" style="display:none" onchange="importSheet(this)">
+      <div class="tb-sep"></div>
+      <button class="btn gold"  onclick="document.getElementById('f-bg').click()">🖼 Changer le fond</button>
+      <input  type="file" id="f-bg" accept="image/*" style="display:none" onchange="importBackground(this)">
+      <div class="tb-sep"></div>
+      <button class="btn green" onclick="exitEditor()">✅ Terminer</button>
+    </div>
+
+    <span id="status"></span>
+  </div>
+
+  <!-- ═══════════════════════ APPLICATION ═══════════════════════ -->
+  <div id="app">
+
+    <!-- Fiche avec image de fond -->
+    <div id="sheet-wrapper">
+      <img src="assets/fond-algranir.jpg" id="sheet-img" alt="Fiche de personnage" draggable="false">
+      <div id="overlay"></div>
+    </div>
+
+    <!-- Panel propriétés (visible uniquement en mode éditeur) -->
+    <div id="props-panel">
+      <h3>⚙ Propriétés</h3>
+      <div id="props-body">
+        <div class="p-empty">Sélectionne un champ<br>pour éditer ses propriétés</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════ SCRIPTS ═══════════════════════ -->
+  <!-- Chargement dans l'ordre des dépendances -->
+  <script src="js/01-model.js"></script>
+  <script src="js/02-render.js"></script>
+  <script src="js/03-drag.js"></script>
+  <script src="js/04-props-panel.js"></script>
+  <script src="js/05-editor.js"></script>
+  <script src="js/06-persistence.js"></script>
+  <script src="js/07-init.js"></script>
+
+</body>
+</html>
