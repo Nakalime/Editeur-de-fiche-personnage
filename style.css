@@ -59,7 +59,7 @@ body {
 
 /* ═══════════════════════ SHEET ═══════════════════════ */
 #sheet-wrapper    { position: relative; flex: 1; min-width: 0; }
-#sheet-img        { width: 100%; display: block; user-select: none; -webkit-user-drag: none; }
+#sheet-img        { width: 100%; display: block; aspect-ratio: auto 297 / 210; user-select: none; -webkit-user-drag: none; }
 #overlay          { position: absolute; inset: 0; }
 
 /* ═══════════════════════ CONTRÔLES (mode normal) ═══════════════════════ */
