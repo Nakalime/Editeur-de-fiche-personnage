@@ -15,16 +15,55 @@ function importBackground(input) {
   reader.onload = e => {
     const dataUrl = e.target.result;
     el('sheet-img').src = dataUrl;
-    try {
-      localStorage.setItem('fiche-bg', dataUrl);
-      showStatus('Fond importé et sauvegardé ✓');
-    } catch {
-      // Image trop grande pour localStorage (> ~5 Mo)
-      showStatus('Fond chargé (trop grand pour persister — copier le fichier à côté du HTML)');
-    }
+    _persistBg(dataUrl, file.name);
   };
   reader.readAsDataURL(file);
   input.value = '';
+}
+
+function _persistBg(dataUrl, filename) {
+  // Tentative 1 : stockage direct
+  try {
+    localStorage.setItem('fiche-bg', dataUrl);
+    localStorage.removeItem('fiche-bg-name');
+    _hideBgNotice();
+    showStatus('Fond importé et sauvegardé ✓');
+    return;
+  } catch {}
+
+  // Tentative 2 : compression JPEG progressive via canvas
+  const img = new Image();
+  img.onload = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width  = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    canvas.getContext('2d').drawImage(img, 0, 0);
+    for (const q of [0.8, 0.6, 0.4, 0.2]) {
+      const compressed = canvas.toDataURL('image/jpeg', q);
+      try {
+        localStorage.setItem('fiche-bg', compressed);
+        localStorage.removeItem('fiche-bg-name');
+        _hideBgNotice();
+        showStatus(`Fond sauvegardé (qualité réduite à ${Math.round(q * 100)} %) ✓`);
+        return;
+      } catch {}
+    }
+    // Toujours trop grand : retenir le nom du fichier pour l'invite
+    try { localStorage.setItem('fiche-bg-name', filename); } catch {}
+    _showBgNotice(filename);
+    showStatus('Fond chargé pour cette session uniquement');
+  };
+  img.src = dataUrl;
+}
+
+function _showBgNotice(name) {
+  const n = el('bg-notice');
+  if (n) { n.textContent = `⚠ Fond non persisté ("${name}") — cliquer sur 🖼`; n.style.display = 'inline'; }
+}
+
+function _hideBgNotice() {
+  const n = el('bg-notice');
+  if (n) { n.style.display = 'none'; n.textContent = ''; }
 }
 
 // ═══════════════════════════════════════════

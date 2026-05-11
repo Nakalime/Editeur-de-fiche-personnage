@@ -51,7 +51,7 @@ function _syncNotesHeight() {
   const panel = el('notes-panel');
   if (window.innerWidth > 900) {
     const h = el('sheet-wrapper').clientHeight;
-    if (h > 0) panel.style.height = h + 'px';
+    panel.style.height = (h > 0 ? h : window.innerHeight - 42) + 'px';
   } else {
     panel.style.height = '';
   }

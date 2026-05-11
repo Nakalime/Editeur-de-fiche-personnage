@@ -12,7 +12,12 @@ window.addEventListener('beforeunload', e => { delete e.returnValue; });
 
 window.addEventListener('load', () => {
   const bg = localStorage.getItem('fiche-bg');
-  if (bg) el('sheet-img').src = bg;
+  if (bg) {
+    el('sheet-img').src = bg;
+  } else {
+    const bgName = localStorage.getItem('fiche-bg-name');
+    if (bgName) _showBgNotice(bgName);
+  }
 
   if (loadLayout()) renderAll();
 

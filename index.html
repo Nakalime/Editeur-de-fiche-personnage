@@ -25,6 +25,10 @@
       <button class="btn"       onclick="document.getElementById('f-import-normal').click()">📥 Import JSON</button>
       <input  type="file" id="f-import-normal" accept=".json" style="display:none" onchange="importSheet(this)">
       <div class="tb-sep"></div>
+      <button class="btn"       onclick="document.getElementById('f-bg-normal').click()">🖼 Changer le fond</button>
+      <input  type="file" id="f-bg-normal" accept="image/*" style="display:none" onchange="importBackground(this)">
+      <span id="bg-notice" style="display:none; color:#ff9944; font-size:11px; font-style:italic;"></span>
+      <div class="tb-sep"></div>
       <button class="btn blue"  onclick="enterEditor()">✏️ Éditeur</button>
     </div>
 
