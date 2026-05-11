@@ -20,7 +20,7 @@ Cliquer sur un champ et taper. Les cases à cocher s'activent au clic. Les valeu
 
 | Bouton | Action |
 | --- | --- |
-| 🗑️ Réinitialiser | Efface toutes les valeurs saisies (confirmation requise) |
+| 🗑️ Réinitialiser | Efface toutes les valeurs, la disposition, le fond et les notes (confirmation requise) |
 | 🖨️ Imprimer | Lance l'impression (Ctrl+P fonctionne aussi) |
 | 📤 Export JSON | Sauvegarde layout + valeurs dans un fichier portable |
 | 📥 Import JSON | Restaure un fichier exporté précédemment |
