@@ -1,10 +1,9 @@
-const CACHE = 'fiche-perso-v2';
+const CACHE = 'fiche-perso-v3';
 const ASSETS = [
   './',
   './index.html',
   './style.css',
   './manifest.json',
-  './assets/fond-algranir.jpg',
   './assets/icon.svg',
   './js/01-model.js',
   './js/02-render.js',
@@ -13,6 +12,7 @@ const ASSETS = [
   './js/05-editor.js',
   './js/06-persistence.js',
   './js/07-init.js',
+  './js/08-notes.js',
 ];
 
 self.addEventListener('install', e => {
