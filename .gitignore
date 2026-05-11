@@ -1,0 +1,6 @@
+# Images de fond — à fournir par l'utilisateur
+assets/*.jpg
+assets/*.jpeg
+assets/*.png
+assets/*.gif
+assets/*.webp

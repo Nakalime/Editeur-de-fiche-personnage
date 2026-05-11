@@ -4,16 +4,24 @@ Outil générique pour créer des fiches de personnage RPG interactives : une im
 
 ## Démarrage rapide
 
-Ouvrir `index.html` directement dans un navigateur (aucun serveur requis).
+**Via GitHub Pages (recommandé)** — ouvrir l'URL du site, cliquer sur "Installer" dans la barre du navigateur.
+
+**En local** — ouvrir `index.html` directement dans un navigateur (aucun serveur requis).
+
+Dans les deux cas, charger une image de fond via **🖼 Changer le fond** pour commencer.
+
+> **Image de fond non fournie** — apporte ta propre image de fiche (scan, photo, export PDF…). L'image n'est jamais envoyée sur un serveur : elle reste dans ton navigateur.
 
 ## Structure des fichiers
 
 ```text
-fiche-algranir/
+editeur-fiche-personnage/
 ├── index.html            Point d'entrée
 ├── style.css             Tout le style (mode normal + éditeur + impression)
+├── manifest.json         Manifeste PWA (installation navigateur)
+├── sw.js                 Service worker (cache offline)
 ├── assets/
-│   └── fond-algranir.jpg Image de fond de la fiche
+│   └── icon.svg          Icône de l'application
 └── js/
     ├── 01-model.js       État global, constantes, utilitaires (uid, byId, isCb…)
     ├── 02-render.js      Création et mise à jour des contrôles dans le DOM
