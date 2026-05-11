@@ -52,7 +52,10 @@ function exportSheet() {
   const a = document.createElement('a');
   a.href     = URL.createObjectURL(blob);
   a.download = 'fiche-personnage.json';
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
   showStatus('Exporté ✓');
 }
 
@@ -76,6 +79,7 @@ function importSheet(input) {
         saveLayout();
         renderAll();
       }
+      if (edMode) exitEditor();
       showStatus('Importé ✓');
     } catch {
       showStatus('Erreur JSON ✗');

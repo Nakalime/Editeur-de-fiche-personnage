@@ -7,6 +7,9 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js');
 }
 
+// Tout est auto-sauvegardé — on supprime le faux positif du navigateur
+window.addEventListener('beforeunload', e => { delete e.returnValue; });
+
 window.addEventListener('load', () => {
   const bg = localStorage.getItem('fiche-bg');
   if (bg) el('sheet-img').src = bg;
