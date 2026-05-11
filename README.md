@@ -26,6 +26,14 @@ Cliquer sur un champ et taper. Les cases à cocher s'activent au clic. Les valeu
 | 📥 Import JSON | Restaure un fichier exporté précédemment |
 | ✏️ Éditeur | Passe en mode éditeur pour modifier la disposition |
 
+### Carnet de notes
+
+Un panel de notes est toujours visible à droite de la fiche (en dessous sur petit écran). Sa hauteur s'adapte automatiquement à celle de la fiche.
+
+- **‹ / ›** : naviguer entre les pages
+- **＋** : ajouter une nouvelle page
+- Les notes sont sauvegardées automatiquement, indépendamment des champs de la fiche
+
 ### Mode éditeur (placement des champs)
 
 Cliquer sur **✏️ Éditeur** pour entrer dans le mode éditeur.
@@ -99,7 +107,8 @@ editeur-fiche-personnage/
     ├── 04-props-panel.js Panneau de propriétés et raccourcis clavier
     ├── 05-editor.js      Mode éditeur (CRUD des contrôles)
     ├── 06-persistence.js localStorage, export/import JSON
-    └── 07-init.js        Restauration au chargement
+    ├── 07-init.js        Restauration au chargement
+    └── 08-notes.js       Carnet de notes paginé
 ```
 
 Les fichiers JS sont chargés en ordre de dépendance via `<script>` classiques, sans bundler (compatible `file://`).

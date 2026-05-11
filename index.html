@@ -58,6 +58,20 @@
       <div id="overlay"></div>
     </div>
 
+    <!-- Carnet de notes (visible en mode normal) -->
+    <div id="notes-panel">
+      <div id="notes-header">
+        <span>📝 Notes</span>
+        <div id="notes-nav">
+          <button class="notes-btn" id="notes-prev" onclick="notesPrev()">‹</button>
+          <span id="notes-page-label">1 / 1</span>
+          <button class="notes-btn" id="notes-next" onclick="notesNext()">›</button>
+          <button class="notes-btn" id="notes-add" onclick="notesAddPage()" title="Nouvelle page">＋</button>
+        </div>
+      </div>
+      <textarea id="notes-area" placeholder="Notes libres…" spellcheck="false"></textarea>
+    </div>
+
     <!-- Panel propriétés (visible uniquement en mode éditeur) -->
     <div id="props-panel">
       <h3>⚙ Propriétés</h3>
@@ -77,6 +91,7 @@
   <script src="js/05-editor.js"></script>
   <script src="js/06-persistence.js"></script>
   <script src="js/07-init.js"></script>
+  <script src="js/08-notes.js"></script>
 
 </body>
 </html>

@@ -55,7 +55,7 @@ body {
 #status                  { color: #e8d4a0; font-size: 11px; font-style: italic; margin-left: 6px; }
 
 /* ═══════════════════════ LAYOUT ═══════════════════════ */
-#app { display: flex; align-items: flex-start; }
+#app { display: flex; align-items: flex-start; flex-wrap: wrap; }
 
 /* ═══════════════════════ SHEET ═══════════════════════ */
 #sheet-wrapper    { position: relative; flex: 1; min-width: 0; }
@@ -231,10 +231,91 @@ body.editor #props-panel { display: block; }
 .p-actions                { padding: 8px 10px; display: flex; flex-direction: column; gap: 5px; }
 .p-actions .btn           { font-size: 11px; padding: 4px; }
 
+/* ═══════════════════════ CARNET DE NOTES ═══════════════════════ */
+#notes-panel {
+  width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: #1a1208;
+  border-left: 2px solid #8a6020;
+  overflow: hidden;
+  position: sticky;
+  top: 42px;
+}
+body.editor #notes-panel { display: none; }
+
+#notes-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: #2a1a08;
+  color: #e8d49a;
+  font-size: 11px;
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #8a6020;
+  flex-shrink: 0;
+}
+
+#notes-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#notes-page-label {
+  font-size: 10px;
+  color: #a08040;
+  min-width: 32px;
+  text-align: center;
+}
+
+.notes-btn {
+  background: none;
+  border: 1px solid #5a3a10;
+  color: #e8d49a;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  padding: 1px 5px;
+  border-radius: 2px;
+}
+.notes-btn:hover          { background: #3a2008; }
+.notes-btn:disabled       { opacity: 0.3; cursor: default; }
+
+#notes-area {
+  flex: 1;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #d4bc88;
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 10px;
+  resize: none;
+  overflow-y: auto;
+}
+#notes-area::placeholder { color: #5a4020; }
+
+@media (max-width: 900px) {
+  #notes-panel {
+    width: 100%;
+    position: static;
+    border-left: none;
+    border-top: 2px solid #8a6020;
+  }
+  #notes-area { min-height: 180px; }
+}
+
 /* ═══════════════════════ IMPRESSION ═══════════════════════ */
 @media print {
   body { background: white; }
-  #toolbar, #props-panel, .ctrl-label, .rot-handle, .rot-line { display: none !important; }
+  #toolbar, #props-panel, #notes-panel, .ctrl-label, .rot-handle, .rot-line { display: none !important; }
   #app { display: block; }
   #sheet-wrapper { width: 100%; }
   @page { size: A4 landscape; margin: 0; }

@@ -15,4 +15,5 @@ window.addEventListener('load', () => {
 
   const raw = localStorage.getItem('fiche-data');
   if (raw) _applyData(JSON.parse(raw));
+
 });
