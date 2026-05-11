@@ -4,7 +4,7 @@ Outil générique pour créer des fiches de personnage RPG interactives : une im
 
 ## Démarrage rapide
 
-**Via GitHub Pages (recommandé)** — ouvrir l'URL du site, cliquer sur "Installer" dans la barre du navigateur.
+**Via GitHub Pages (recommandé)** — ouvrir l'URL du site, cliquer sur "Installer" dans la barre du navigateur pour l'ajouter comme application.
 
 **En local** — ouvrir `index.html` directement dans un navigateur (aucun serveur requis).
 
@@ -12,43 +12,19 @@ Dans les deux cas, charger une image de fond via **🖼 Changer le fond** pour c
 
 > **Image de fond non fournie** — apporte ta propre image de fiche (scan, photo, export PDF…). L'image n'est jamais envoyée sur un serveur : elle reste dans ton navigateur.
 
-## Structure des fichiers
-
-```text
-editeur-fiche-personnage/
-├── index.html            Point d'entrée
-├── style.css             Tout le style (mode normal + éditeur + impression)
-├── manifest.json         Manifeste PWA (installation navigateur)
-├── sw.js                 Service worker (cache offline)
-├── assets/
-│   └── icon.svg          Icône de l'application
-└── js/
-    ├── 01-model.js       État global, constantes, utilitaires (uid, byId, isCb…)
-    ├── 02-render.js      Création et mise à jour des contrôles dans le DOM
-    ├── 03-drag.js        Déplacement et rotation en mode éditeur
-    ├── 04-props-panel.js Panneau de propriétés et raccourcis clavier
-    ├── 05-editor.js      Entrée/sortie du mode éditeur, CRUD des contrôles
-    ├── 06-persistence.js Sauvegarde localStorage, export/import JSON
-    └── 07-init.js        Point d'entrée : restauration au chargement
-```
-
-Les fichiers JS sont chargés en ordre de dépendance via des balises `<script>` classiques (pas de modules ES, compatible `file://`).
-
 ## Utilisation
 
 ### Mode normal (remplissage)
 
-Cliquer sur un champ et taper. Les cases à cocher s'activent au clic. Toutes les valeurs sont sauvegardées automatiquement dans le `localStorage` à chaque frappe.
-
-Boutons de la barre d'outils :
+Cliquer sur un champ et taper. Les cases à cocher s'activent au clic. Les valeurs sont sauvegardées automatiquement dans le navigateur à chaque frappe.
 
 | Bouton | Action |
 | --- | --- |
-| 💾 Sauvegarder | Sauvegarde explicite dans le localStorage |
-| 📂 Charger | Recharge les dernières valeurs sauvegardées |
-| 🗑️ Réinitialiser | Efface toutes les valeurs (confirmation requise) |
+| 🗑️ Réinitialiser | Efface toutes les valeurs saisies (confirmation requise) |
 | 🖨️ Imprimer | Lance l'impression (Ctrl+P fonctionne aussi) |
-| ✏️ Éditeur | Passe en mode éditeur |
+| 📤 Export JSON | Sauvegarde layout + valeurs dans un fichier portable |
+| 📥 Import JSON | Restaure un fichier exporté précédemment |
+| ✏️ Éditeur | Passe en mode éditeur pour modifier la disposition |
 
 ### Mode éditeur (placement des champs)
 
@@ -56,62 +32,78 @@ Cliquer sur **✏️ Éditeur** pour entrer dans le mode éditeur.
 
 - **Ajouter un champ** : boutons `+ Texte`, `+ Nombre`, `+ Case □`, `+ Losange ◇`
 - **Déplacer** : glisser-déposer le champ
-- **Redimensionner / repositionner précisément** : modifier les valeurs dans le panneau de propriétés (droite)
-- **Pivoter** : glisser la poignée bleue `↻` au-dessus du champ, ou éditer le champ `rotation` dans les propriétés
+- **Repositionner précisément** : modifier les valeurs dans le panneau de propriétés (à droite)
+- **Pivoter** : glisser la poignée bleue `↻` au-dessus du champ, ou saisir une valeur dans le champ `rotation`
 - **Touches flèches** : déplace le champ sélectionné de 0,1 % (+ Shift = 0,5 %)
 - **Suppr / Backspace** : supprime le champ sélectionné
-- **Dupliquer** : bouton ⧉ dans la barre ou dans les propriétés
+- **⧉ Dupliquer** : disponible dans la barre et dans le panneau de propriétés
 - **✅ Terminer** : quitte le mode éditeur
 
-Les losanges (`cb-di`) ont une rotation de base de 45° ; le champ `rotation` s'ajoute à ce décalage.
+Les losanges (`◇`) ont une rotation de base de 45° ; le champ `rotation` s'ajoute à ce décalage.
 
-Le champ `fond` peut être remplacé via le bouton **🖼 Changer le fond** (l'image est stockée dans le localStorage si elle fait moins de ~5 Mo).
-
-## Format JSON d'export
-
-Le bouton **📤 Export JSON** génère un fichier `fiche-personnage.json` contenant à la fois la disposition des champs et les valeurs saisies :
-
-```json
-{
-  "version": 1,
-  "layout": {
-    "uid": 5,
-    "controls": [
-      {
-        "id": "c1",
-        "type": "text",
-        "name": "nom_personnage",
-        "left": 23.4,
-        "top": 8.1,
-        "width": 30.0,
-        "height": 3.2,
-        "rotation": 0,
-        "fontSize": 1.4,
-        "color": "#1a0e00",
-        "bold": true,
-        "value": "",
-        "checked": false
-      }
-    ]
-  },
-  "data": {
-    "c1": "Algranir",
-    "c2": false
-  }
-}
-```
-
-**Compatibilité ascendante** : les anciens fichiers `algranir-layout.json` (format sans `version`) sont acceptés à l'import — la disposition est restaurée, les données étant absentes de l'ancien format.
+L'image de fond peut être remplacée via **🖼 Changer le fond** (stockée dans le navigateur si < ~5 Mo).
 
 ## Persistance
 
 | Mécanisme | Ce qui est stocké | Portabilité |
 | --- | --- | --- |
-| `localStorage` (automatique) | Layout + valeurs + fond | Navigateur local uniquement |
-| Export JSON | Layout + valeurs | Fichier transférable |
+| Navigateur (automatique) | Layout + valeurs + fond | Local uniquement |
+| Export / Import JSON | Layout + valeurs | Fichier transférable entre appareils |
 
-Pour partager ou sauvegarder une fiche complète hors du navigateur, utiliser **📤 Export JSON** / **📥 Import JSON**.
+Pour partager ou archiver une fiche complète, utiliser **📤 Export JSON** — le fichier contient à la fois la disposition des champs et toutes les valeurs saisies.
+
+## Format JSON
+
+```json
+{
+  "version": 1,
+  "layout": {
+    "uid": 3,
+    "controls": [
+      {
+        "id": "c1",
+        "type": "text",
+        "name": "nom_personnage",
+        "left": 23.4, "top": 8.1,
+        "width": 30.0, "height": 3.2,
+        "rotation": 0,
+        "fontSize": 1.4,
+        "color": "#1a0e00",
+        "bold": true
+      }
+    ]
+  },
+  "data": {
+    "c1": "Nom du personnage",
+    "c2": false
+  }
+}
+```
+
+Les fichiers exportés avec un ancien format (sans champ `version`) sont acceptés à l'import — seul le layout est restauré.
+
+## Structure des fichiers
+
+```text
+editeur-fiche-personnage/
+├── index.html            Point d'entrée
+├── style.css             Styles (mode normal, éditeur, impression)
+├── manifest.json         Manifeste PWA
+├── sw.js                 Service worker (cache hors-ligne)
+├── assets/
+│   └── icon.svg          Icône de l'application
+└── js/
+    ├── 01-model.js       État global et utilitaires
+    ├── 02-render.js      Rendu des contrôles dans le DOM
+    ├── 03-drag.js        Déplacement et rotation
+    ├── 04-props-panel.js Panneau de propriétés et raccourcis clavier
+    ├── 05-editor.js      Mode éditeur (CRUD des contrôles)
+    ├── 06-persistence.js localStorage, export/import JSON
+    └── 07-init.js        Restauration au chargement
+```
+
+Les fichiers JS sont chargés en ordre de dépendance via `<script>` classiques, sans bundler (compatible `file://`).
 
 ## Impression
 
-Utiliser le bouton **🖨️ Imprimer** ou `Ctrl+P`. La mise en page est configurée en A4 paysage (`@page { size: A4 landscape; margin: 0 }`). La barre d'outils et les éléments de l'éditeur sont masqués à l'impression.
+Bouton **🖨️ Imprimer** ou `Ctrl+P`. Mise en page A4 paysage, barre d'outils et éléments de l'éditeur masqués.
