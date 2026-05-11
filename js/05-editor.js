@@ -51,14 +51,12 @@ function addCtrl(type) {
 // ── Suppression ──
 function deleteSel() {
   if (!selId) return;
-  showConfirm('Supprimer ce champ ?', () => {
-    controls = controls.filter(c => c.id !== selId);
-    const w = ctrlEl(selId);
-    if (w) w.remove();
-    selId = null;
-    showProps(null);
-    saveLayout();
-  });
+  controls = controls.filter(c => c.id !== selId);
+  const w = ctrlEl(selId);
+  if (w) w.remove();
+  selId = null;
+  showProps(null);
+  saveLayout();
 }
 
 // ── Duplication ──
