@@ -119,18 +119,6 @@ function autoSave() {
   localStorage.setItem('fiche-data', JSON.stringify(gatherData()));
 }
 
-function saveSheet() {
-  autoSave();
-  showStatus('Sauvegardé ✓');
-}
-
-function loadSheet() {
-  const raw = localStorage.getItem('fiche-data');
-  if (!raw) { showStatus('Aucune sauvegarde.'); return; }
-  _applyData(JSON.parse(raw));
-  showStatus('Chargé ✓');
-}
-
 function resetValues() {
   if (!confirm('Réinitialiser tous les champs ?')) return;
 
