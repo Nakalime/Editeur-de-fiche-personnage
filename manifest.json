@@ -1,0 +1,19 @@
+{
+  "name": "Éditeur de Fiche Personnage",
+  "short_name": "Fiche Perso",
+  "description": "Éditeur de fiche de personnage RPG — overlay interactif sur image de fond",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#2a1a08",
+  "theme_color": "#2a1a08",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -3,6 +3,10 @@
  * Dépend de : tous les fichiers précédents
  */
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js');
+}
+
 window.addEventListener('load', () => {
   const bg = localStorage.getItem('fiche-bg');
   if (bg) el('sheet-img').src = bg;
