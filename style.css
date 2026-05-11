@@ -89,8 +89,6 @@ body {
   cursor: pointer;
   user-select: none;
   background: transparent;
-  box-sizing: border-box;
-  border: 2px solid currentColor;
 }
 .ctrl-cb.checked { background: currentColor; }
 
