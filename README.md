@@ -4,7 +4,7 @@ Outil générique pour créer des fiches de personnage RPG interactives : une im
 
 ## Démarrage rapide
 
-**Via GitHub Pages (recommandé)** — ouvrir l'URL du site, cliquer sur "Installer" dans la barre du navigateur pour l'ajouter comme application.
+**Via GitHub Pages (recommandé)** — [nakalime.github.io/Editeur-de-fiche-personnage](https://nakalime.github.io/Editeur-de-fiche-personnage/), cliquer sur "Installer" dans la barre du navigateur pour l'ajouter comme application.
 
 **En local** — ouvrir `index.html` directement dans un navigateur (aucun serveur requis).
 
